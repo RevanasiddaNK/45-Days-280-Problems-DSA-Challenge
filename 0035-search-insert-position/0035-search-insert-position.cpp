@@ -1,24 +1,22 @@
 class Solution {
 public:
+
+    int lowerBound(vector<int>& nums, int target){
+        int s=0, e = nums.size()-1;
+        int ans=-1;
+        while(s <= e){
+            int m = s+(e-s)/2;
+            if(nums[m] >=  target){
+                ans = m;
+                e = m-1;
+            }else{
+                s = m+1;
+            }
+        }
+        return s;
+    }
+
     int searchInsert(vector<int>& nums, int target) {
-        int s=0;
-        int e=nums.size()-1;
-        int m;
-        if(nums[0]>target){
-            return 0;
-        }
-        while(s<=e){
-            m=s+(e-s)/2;
-            if(nums[m]==target){
-                return m;
-            }
-            else if(nums[m]>target){
-                e=m-1;
-            }
-            else{
-                s=m+1;
-            }
-        }
-         return s;
-        }
+        return lowerBound(nums, target);
+    }
 };
